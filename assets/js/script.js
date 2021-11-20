@@ -1,7 +1,5 @@
 // Free key from https://openweathermap.org/
 const key = "67ce8748337fe54c0e9102ce6f8ff78e";
-// https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={API key}
-// http://api.openweathermap.org/geo/1.0/direct?q={city name}&appid={API key}
 
 const findCityRequest = "https://api.openweathermap.org/geo/1.0/direct";
 const getCityWeatherRequest = "https://api.openweathermap.org/data/2.5/onecall";
@@ -17,7 +15,8 @@ var curForecast = {
 
 };
 
-// General Functions
+/* General Functions */
+
 function setup() {
     loadStorage();
     checkDisplayWeather();
@@ -86,7 +85,7 @@ function getUVClass(uvi) {
 function updateWeatherDisplay() {
     // Update current
     $("#curCityName").text(selectedCity + " (" + curWeather.date.format("MM/DD/YYYY") + ")")
-    .append($("<br><img>").attr("src", curWeather.img));
+        .append($("<br><img>").attr("src", curWeather.img));
     $("#curTemp").text("Temp: " + curWeather.temp + "F");
     $("#curWind").text("Wind: " + curWeather.wind + "mph");
     $("#curHumidity").text("Humidity: " + curWeather.humid + "%");
@@ -100,10 +99,10 @@ function updateWeatherDisplay() {
             $("<div>")
             .addClass("day col-2")
             .html(`<h5 class="text-center">${day.date.format("MM/DD/YYYY")}</h5>` +
-            `<img src="${day.img}"/>` +
-            `<p>Temp: ${day.temp}F</p>` +
-            `<p>Wind: ${day.wind}mph</p>` +
-            `<p>Humidity: ${day.humid}%</p>`)
+                `<img src="${day.img}"/>` +
+                `<p>Temp: ${day.temp}F</p>` +
+                `<p>Wind: ${day.wind}mph</p>` +
+                `<p>Humidity: ${day.humid}%</p>`)
         );
     });
 }

@@ -14,12 +14,14 @@ body {
     background-color: var(--page-background);
     color: var(--default-text-color);
 }
+
 /** Header **/
 header {
     border-bottom: var(--default-text-color) thick solid;
     margin-bottom: 5px;
     color: var(--accent-text-color);
 }
+
 /** Search **/
 .search {
     border-right: medium solid var(--accent-border-color);
