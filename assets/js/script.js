@@ -92,6 +92,7 @@ function updateWeatherDisplay() {
     $("#curUV").html(`UV Index: <span class="${uvClass}">${curWeather.uvi}</span>`);
 
     // Update forecast
+    $(".dayContainer").empty();
     curForecast.forEach(day => {
         $(".dayContainer").append(
             $("<div>")
@@ -140,6 +141,7 @@ function getWeather() {
                 humid: data.current.humidity,
                 uvi: data.current.uvi
             }
+            curForecast = [];
             for (let i = 0; i < 5; i++) {
                 curForecast.push({
                     date: moment().add(i + 1, 'd'),
@@ -165,6 +167,7 @@ function searchCity(event) {
         saveStorage();
         // After weather is obtained, update the display
         getWeather().then(() => {
+            checkDisplayWeather();
             updateWeatherDisplay();
         });
     });
@@ -175,5 +178,19 @@ function searchCity(event) {
 // Search event listener
 $("#formSearch").on('submit', searchCity);
 
+// Search History event handler
+function searchHistory(event) {
+    event.preventDefault();
+    selectedCity = event.target.getAttribute("id");
+    saveStorage();
+    updateSearchHistory();
+    getWeather().then(() => {
+        checkDisplayWeather();
+        updateWeatherDisplay();
+    });
+}
+
 // Setup on load
 setup();
+
+$("#cityHistory").on('click', ".inactive", searchHistory);
