@@ -33,6 +33,7 @@ header {
 
 .current {
     border-bottom: medium solid var(--secondary-background);
+    padding: 5px;
 }
 
 .active {
@@ -43,4 +44,29 @@ header {
 .inactive {
     background-color: var(--secondary-background);
     color: var(--default-text-color);
+}
+
+.UVLow {
+    color: rgba(50, 205, 50, 0.8);
+}
+
+.UVMod {
+    color: rgba(255, 255, 0, 0.8);
+}
+
+.UVHigh {
+    color: rgba(255, 166, 0, 0.8);
+}
+
+.UVVHigh {
+    color: rgba(255, 0, 0, 0.8);
+}
+
+.UVExt {
+    color: rgba(128, 0, 128, 0.8);
+}
+
+.day {
+    background-color: var(--secondary-background);
+    border-radius: 15px;
 }

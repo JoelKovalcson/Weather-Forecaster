@@ -43,8 +43,9 @@ function checkDisplayWeather() {
     let flag = false;
     if (selectedCity == "") flag = true;
     // This should only happen when page is freshly loaded and a city exists from localStorage
-    else if (curWeather == {}) {
-        getWeather().then(()=> {
+    else if (Object.keys(curWeather).length === 0) {
+        // Get fresh data about that city
+        getWeather().then(() => {
             updateWeatherDisplay();
         });
     }
@@ -52,8 +53,7 @@ function checkDisplayWeather() {
         $("#noSearch").removeAttr("hidden");
         $(".current").attr("hidden", "hidden");
         $(".forecast").attr("hidden", "hidden");
-    }
-    else {
+    } else {
         $("#noSearch").attr("hidden", "hidden");
         $(".current").removeAttr("hidden");
         $(".forecast").removeAttr("hidden");
@@ -68,16 +68,37 @@ function updateSearchHistory() {
             .attr("type", "button")
             .attr("id", city)
             .text(city);
-        if(city == selectedCity) btn.addClass("active order-first btn w-100 m-2");
-        else btn.addClass("inactive btn w-100 m-2");
+        if (city == selectedCity) btn.addClass("active order-first btn w-100 mb-2 fw-bolder");
+        else btn.addClass("inactive btn w-100 mb-2");
         cityHistory.append(btn);
     });
 }
 
+function getUVClass(uvi) {
+    if (uvi < 3) return "UVLow";
+    else if (uvi < 6) return "UVMod";
+    else if (uvi < 8) return "UVHigh";
+    else if (uvi < 11) return "UVVHigh";
+    else return "UVExt";
+}
+
 function updateWeatherDisplay() {
     // Update current
-    $("#curCityName").text(selectedCity + " (" + curWeather.date.format("MM/DD/YYYY"));
+    $("#curCityName").text(selectedCity + " (" + curWeather.date.format("MM/DD/YYYY") + ")");
+    $("#curTemp").text("Temp: " + curWeather.temp + "F");
+    $("#curWind").text("Wind: " + curWeather.wind + "mph");
+    $("#curHumidity").text("Humidity: " + curWeather.humid + "%");
+    let uvClass = getUVClass(curWeather.uvi);
+    $("#curUV").html(`UV Index: <span class="${uvClass}">${curWeather.uvi}</span>`);
+
     // Update forecast
+    curForecast.forEach(day => {
+        $(".dayContainer").append(
+            $("<div>")
+            .addClass("day col-2")
+            .html(`<h5 class="text-center">${day.date.format("MM/DD/YYYY")}</h5><p>Temp: ${day.temp}F</p><p>Wind: ${day.wind}mph</p><p>Humidity: ${day.humid}%</p>`)
+        );
+    });
 }
 
 // API Requests
@@ -114,7 +135,8 @@ function getWeather() {
                 date: moment(),
                 // Some math to convert kelvin to fahrenheit and round to nearest tenth of a degree
                 temp: Math.round(((data.current.temp - 273.15) * (9 / 5) + 32) * 10) / 10,
-                wind: data.current.wind_speed,
+                // Convert m/s to mph
+                wind: Math.round((data.current.wind_speed * 2.237) * 10 / 10),
                 humid: data.current.humidity,
                 uvi: data.current.uvi
             }
@@ -123,7 +145,8 @@ function getWeather() {
                     date: moment().add(i + 1, 'd'),
                     // Some math to convert kelvin to fahrenheit and round to nearest tenth of a degree
                     temp: Math.round(((data.daily[i].temp.max - 273.15) * (9 / 5) + 32) * 10) / 10,
-                    wind: data.daily[i].wind_speed,
+                    // Convert m/s to mph
+                    wind: Math.round((data.daily[i].wind_speed * 2.237) * 10 / 10),
                     humid: data.daily[i].humidity
                 });
             }

@@ -20,14 +20,14 @@
     </header>
     <div class="row justify-content-center">
         <!-- Search section -->
-        <section class="search row col-4">
+        <section class="search col-4">
             <h2 class="fs-2">Search for a City:</h2>
-            <form id="formSearch" class="pb-2">
+            <form id="formSearch" class="pb-2 mb-2">
                 <input type="text" placeholder="Enter A City Name" id="citySearch" class="fs-6 w-100 mb-2">
                 <br>
                 <button type="submit" class="btn btn-light btn-sm w-100 fs-6 fw-bold">Search</button>
             </form>
-            <div id="cityHistory" class="d-flex flex-wrap">
+            <div id="cityHistory" class="cityHistory align-items-center d-flex flex-wrap">
                 <!--
                 Example child:
                 <button class="{active/inactive} [order-first]" type="button" id="{cityName}">{cityName}</button>
@@ -36,22 +36,21 @@
         </section>
 
         <div class="col-8 row justify-content-center">
-            <span id="noSearch" class="fs-4">Please enter a city name in the search box to get started!</span>
+            <span id="noSearch" class="fs-4">Please search for a city name to get started!</span>
             <!-- Current Values -->
             <section class="current" hidden="hidden">
-                <h3 class="fs-2">Today</h3>
-                <h2 id="curCityName"></h2>
-                <p id="curTemp"></p>
-                <p id="curWind"></p>
-                <p id="curHumidity"></p>
-                <p id="curUV"></p>
+                <h3 id="curCityName"></h3>
+                <p id="curTemp" class="fs-5"></p>
+                <p id="curWind" class="fs-5"></p>
+                <p id="curHumidity" class="fs-5"></p>
+                <p id="curUV" class="fs-5"></p>
             </section>
 
             <!-- Forecast -->
             <section class="forecast" hidden="hidden">
                 <h3 class="fs-2">5-Day Forecast</h3>
                 <br>
-                <div class="row dayContainer">
+                <div class="row dayContainer d-flex flex-nowrap justify-content-between px-2">
 
                 </div>
                 <!--
@@ -69,10 +68,8 @@
     </div>
 
     <!-- JQuery -->
-    <script
-    src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- Moment.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <!-- Custom Script -->
