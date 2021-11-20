@@ -10,11 +10,12 @@ const cityHistory = $("#cityHistory");
 const dayContainer = $("#dayContainer");
 const cityInput = $("#citySearch");
 
-
 var cityDict = {};
 var selectedCity = "";
 var curWeather = {};
-var curForecast = [];
+var curForecast = {
+
+};
 
 // General Functions
 function setup() {
@@ -68,8 +69,8 @@ function updateSearchHistory() {
             .attr("type", "button")
             .attr("id", city)
             .text(city);
-        if (city == selectedCity) btn.addClass("active order-first btn w-100 mb-2 fw-bolder");
-        else btn.addClass("inactive btn w-100 mb-2");
+        if (city == selectedCity) btn.addClass("active order-first btn w-75 mb-2 fw-bolder");
+        else btn.addClass("inactive btn w-75 mb-2");
         cityHistory.append(btn);
     });
 }
@@ -84,7 +85,8 @@ function getUVClass(uvi) {
 
 function updateWeatherDisplay() {
     // Update current
-    $("#curCityName").text(selectedCity + " (" + curWeather.date.format("MM/DD/YYYY") + ")");
+    $("#curCityName").text(selectedCity + " (" + curWeather.date.format("MM/DD/YYYY") + ")")
+    .append($("<br><img>").attr("src", curWeather.img));
     $("#curTemp").text("Temp: " + curWeather.temp + "F");
     $("#curWind").text("Wind: " + curWeather.wind + "mph");
     $("#curHumidity").text("Humidity: " + curWeather.humid + "%");
@@ -97,7 +99,11 @@ function updateWeatherDisplay() {
         $(".dayContainer").append(
             $("<div>")
             .addClass("day col-2")
-            .html(`<h5 class="text-center">${day.date.format("MM/DD/YYYY")}</h5><p>Temp: ${day.temp}F</p><p>Wind: ${day.wind}mph</p><p>Humidity: ${day.humid}%</p>`)
+            .html(`<h5 class="text-center">${day.date.format("MM/DD/YYYY")}</h5>` +
+            `<img src="${day.img}"/>` +
+            `<p>Temp: ${day.temp}F</p>` +
+            `<p>Wind: ${day.wind}mph</p>` +
+            `<p>Humidity: ${day.humid}%</p>`)
         );
     });
 }
@@ -111,6 +117,7 @@ function findCity(city) {
             return result.json();
         })
         .then(data => {
+            // If multiple cities are returned, only use the first one
             let tmp = data[0];
             cityDict[tmp.name] = {
                 lat: tmp.lat,
@@ -132,6 +139,8 @@ function getWeather() {
             return result.json();
         })
         .then(data => {
+            console.log(data);
+            console.log(data.current.weather[0].id);
             curWeather = {
                 date: moment(),
                 // Some math to convert kelvin to fahrenheit and round to nearest tenth of a degree
@@ -139,7 +148,8 @@ function getWeather() {
                 // Convert m/s to mph
                 wind: Math.round((data.current.wind_speed * 2.237) * 10 / 10),
                 humid: data.current.humidity,
-                uvi: data.current.uvi
+                uvi: data.current.uvi,
+                img: `https://openweathermap.org/img/wn/${data.current.weather[0].icon}.png`
             }
             curForecast = [];
             for (let i = 0; i < 5; i++) {
@@ -149,7 +159,8 @@ function getWeather() {
                     temp: Math.round(((data.daily[i].temp.max - 273.15) * (9 / 5) + 32) * 10) / 10,
                     // Convert m/s to mph
                     wind: Math.round((data.daily[i].wind_speed * 2.237) * 10 / 10),
-                    humid: data.daily[i].humidity
+                    humid: data.daily[i].humidity,
+                    img: `https://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}.png`
                 });
             }
         })

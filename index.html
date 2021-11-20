@@ -20,22 +20,17 @@
     </header>
     <div class="row justify-content-center">
         <!-- Search section -->
-        <section class="search col-4">
+        <section class="search col-3">
             <h2 class="fs-2">Search for a City:</h2>
             <form id="formSearch" class="pb-2 mb-2">
                 <input type="text" placeholder="Enter A City Name" id="citySearch" class="fs-6 w-100 mb-2">
                 <br>
                 <button type="submit" class="btn btn-light btn-sm w-100 fs-6 fw-bold">Search</button>
             </form>
-            <div id="cityHistory" class="cityHistory align-items-center d-flex flex-wrap">
-                <!--
-                Example child:
-                <button class="{active/inactive} [order-first]" type="button" id="{cityName}">{cityName}</button>
-            -->
-            </div>
+            <div id="cityHistory" class="cityHistory justify-content-center align-items-center d-flex flex-wrap"></div>
         </section>
 
-        <div class="col-8 row justify-content-center">
+        <div class="col-9 row justify-content-center">
             <span id="noSearch" class="fs-4">Please search for a city name to get started!</span>
             <!-- Current Values -->
             <section class="current" hidden="hidden">
@@ -50,19 +45,7 @@
             <section class="forecast" hidden="hidden">
                 <h3 class="fs-2">5-Day Forecast</h3>
                 <br>
-                <div class="row dayContainer d-flex flex-nowrap justify-content-between px-2">
-
-                </div>
-                <!--
-                    Example child:
-                    <div class="card col">
-                        <h4>date</h4>
-                        <img src="iconsource"></img>
-                        <p>Temp</p>
-                        <p>Wind</p>
-                        <p>Humidity</p>
-                    </div>
-                -->
+                <div class="row dayContainer d-flex flex-nowrap justify-content-around px-2"></div>
             </section>
         </div>
     </div>
