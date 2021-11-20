@@ -23,11 +23,11 @@
         <section class="search row col-4">
             <h2 class="fs-2">Search for a City:</h2>
             <form id="formSearch" class="pb-2">
-                <input type="text" placeholder="City Name" id="citySearch" class="fs-6 w-100 mb-2">
+                <input type="text" placeholder="Enter A City Name" id="citySearch" class="fs-6 w-100 mb-2">
                 <br>
-                <button type="submit" class="btn btn-light btn-sm w-100">Search</button>
+                <button type="submit" class="btn btn-light btn-sm w-100 fs-6 fw-bold">Search</button>
             </form>
-            <div id="cityHistory d-flex flex-nowrap">
+            <div id="cityHistory" class="d-flex flex-wrap">
                 <!--
                 Example child:
                 <button class="{active/inactive} [order-first]" type="button" id="{cityName}">{cityName}</button>
@@ -38,7 +38,7 @@
         <div class="col-8 row justify-content-center">
             <span id="noSearch" class="fs-4">Please enter a city name in the search box to get started!</span>
             <!-- Current Values -->
-            <section class="current justify-content-center" hidden>
+            <section class="current" hidden="hidden">
                 <h3 class="fs-2">Today</h3>
                 <h2 id="curCityName"></h2>
                 <p id="curTemp"></p>
@@ -48,7 +48,7 @@
             </section>
 
             <!-- Forecast -->
-            <section class="forecast justify-content-center" hidden>
+            <section class="forecast" hidden="hidden">
                 <h3 class="fs-2">5-Day Forecast</h3>
                 <br>
                 <div class="row dayContainer">

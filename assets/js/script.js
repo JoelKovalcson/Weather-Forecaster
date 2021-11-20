@@ -34,6 +34,7 @@ function loadStorage() {
         selectedCity = "";
     } else {
         selectedCity = JSON.parse(localStorage.getItem("curCity"));
+        updateSearchHistory();
         if (selectedCity == null) selectedCity = "";
     }
 }
@@ -41,27 +42,41 @@ function loadStorage() {
 function checkDisplayWeather() {
     let flag = false;
     if (selectedCity == "") flag = true;
-    else if (curWeather == {}) getWeather();
-    $("#noSearch").attr("hidden", flag);
-    $(".current").attr("hidden", !flag);
-    $(".forecast").attr("hidden", !flag);
+    // This should only happen when page is freshly loaded and a city exists from localStorage
+    else if (curWeather == {}) {
+        getWeather().then(()=> {
+            updateWeatherDisplay();
+        });
+    }
+    if (flag) {
+        $("#noSearch").removeAttr("hidden");
+        $(".current").attr("hidden", "hidden");
+        $(".forecast").attr("hidden", "hidden");
+    }
+    else {
+        $("#noSearch").attr("hidden", "hidden");
+        $(".current").removeAttr("hidden");
+        $(".forecast").removeAttr("hidden");
+    }
 }
 
 function updateSearchHistory() {
+    cityHistory.empty();
     Object.entries(cityDict).forEach(e => {
-        const [city, data] = e;
+        const [city, _] = e;
         let btn = $("<button>")
             .attr("type", "button")
             .attr("id", city)
             .text(city);
-        if(city == selectedCity) btn.addClass("active");
-        else btn.addClass("inactive");
+        if(city == selectedCity) btn.addClass("active order-first btn w-100 m-2");
+        else btn.addClass("inactive btn w-100 m-2");
+        cityHistory.append(btn);
     });
 }
 
 function updateWeatherDisplay() {
     // Update current
-
+    $("#curCityName").text(selectedCity + " (" + curWeather.date.format("MM/DD/YYYY"));
     // Update forecast
 }
 
@@ -138,3 +153,4 @@ function searchCity(event) {
 $("#formSearch").on('submit', searchCity);
 
 // Setup on load
+setup();

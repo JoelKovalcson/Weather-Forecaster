@@ -37,8 +37,10 @@ header {
 
 .active {
     background-color: var(--accent-text-color);
+    color: var(--page-background);
 }
 
 .inactive {
     background-color: var(--secondary-background);
+    color: var(--default-text-color);
 }
