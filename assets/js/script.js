@@ -3,7 +3,7 @@ const key = "67ce8748337fe54c0e9102ce6f8ff78e";
 // https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={API key}
 // http://api.openweathermap.org/geo/1.0/direct?q={city name}&appid={API key}
 
-const findCityRequest = "http://api.openweathermap.org/geo/1.0/direct";
+const findCityRequest = "https://api.openweathermap.org/geo/1.0/direct";
 const getCityWeatherRequest = "https://api.openweathermap.org/data/2.5/onecall";
 
 const cityHistory = $("#cityHistory");
