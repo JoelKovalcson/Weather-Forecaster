@@ -1,0 +1,44 @@
+/** Global **/
+
+/* Preset Colors - Dark Theme! */
+:root {
+    --page-background: #303033;
+    --default-text-color: #D0D0D0;
+    --accent-text-color: #f56e0b;
+    --accent-border-color: #aa4d0b;
+    --secondary-background: #505054;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--page-background);
+    color: var(--default-text-color);
+}
+
+header {
+    border-bottom: var(--default-text-color) thick solid;
+    margin-bottom: 5px;
+    color: var(--accent-text-color);
+}
+
+.search {
+    border-right: medium solid var(--accent-border-color);
+    margin-right: 5px;
+}
+
+.search form {
+    margin-bottom: 5px;
+    border-bottom: medium solid var(--secondary-background);
+}
+
+.current {
+    border-bottom: medium solid var(--secondary-background);
+}
+
+.active {
+    background-color: var(--accent-text-color);
+}
+
+.inactive {
+    background-color: var(--secondary-background);
+}

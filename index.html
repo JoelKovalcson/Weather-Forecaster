@@ -1,14 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/styles.css"/> 
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="./assets/css/styles.css" />
     <title>Weather Forecaster</title>
 </head>
-<body>
-    
+
+<body class="container-fluid">
+    <!-- Project Title -->
+    <header class="text-center">
+        <h1>Weather Forecaster</h1>
+    </header>
+    <div class="row justify-content-center">
+        <!-- Search section -->
+        <section class="search row col-4">
+            <h2 class="fs-2">Search for a City:</h2>
+            <form id="formSearch" class="pb-2">
+                <input type="text" placeholder="City Name" id="citySearch" class="fs-6 w-100 mb-2">
+                <br>
+                <button type="submit" class="btn btn-light btn-sm w-100">Search</button>
+            </form>
+            <div id="cityHistory d-flex flex-nowrap">
+                <!--
+                Example child:
+                <button class="{active/inactive} [order-first]" type="button" id="{cityName}">{cityName}</button>
+            -->
+            </div>
+        </section>
+
+        <div class="col-8 row justify-content-center">
+            <span id="noSearch" class="fs-4">Please enter a city name in the search box to get started!</span>
+            <!-- Current Values -->
+            <section class="current justify-content-center" hidden>
+                <h3 class="fs-2">Today</h3>
+                <h2 id="curCityName"></h2>
+                <p id="curTemp"></p>
+                <p id="curWind"></p>
+                <p id="curHumidity"></p>
+                <p id="curUV"></p>
+            </section>
+
+            <!-- Forecast -->
+            <section class="forecast justify-content-center" hidden>
+                <h3 class="fs-2">5-Day Forecast</h3>
+                <br>
+                <div class="row dayContainer">
+
+                </div>
+                <!--
+                    Example child:
+                    <div class="card col">
+                        <h4>date</h4>
+                        <img src="iconsource"></img>
+                        <p>Temp</p>
+                        <p>Wind</p>
+                        <p>Humidity</p>
+                    </div>
+                -->
+            </section>
+        </div>
+    </div>
+
+    <!-- JQuery -->
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <!-- Custom Script -->
     <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
