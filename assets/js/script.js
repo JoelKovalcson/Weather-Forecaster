@@ -1,5 +1,5 @@
 // Free key from https://openweathermap.org/
-const key = "67ce8748337fe54c0e9102ce6f8ff78e";
+const totally_not_a_key = "67ce8748337fe54c0e9102ce6f8ff78e";
 
 const findCityRequest = "https://api.openweathermap.org/geo/1.0/direct";
 const getCityWeatherRequest = "https://api.openweathermap.org/data/2.5/onecall";
@@ -11,9 +11,7 @@ const cityInput = $("#citySearch");
 var cityDict = {};
 var selectedCity = "";
 var curWeather = {};
-var curForecast = {
-
-};
+var curForecast = {};
 
 /* General Functions */
 
@@ -84,11 +82,11 @@ function getUVClass(uvi) {
 
 function updateWeatherDisplay() {
     // Update current
-    $("#curCityName").text(selectedCity + " (" + curWeather.date.format("MM/DD/YYYY") + ")")
+    $("#curCityName").text(`${selectedCity} (${curWeather.date.format("MM/DD/YYYY")})`)
         .append($("<br><img>").attr("src", curWeather.img));
-    $("#curTemp").text("Temp: " + curWeather.temp + "F");
-    $("#curWind").text("Wind: " + curWeather.wind + "mph");
-    $("#curHumidity").text("Humidity: " + curWeather.humid + "%");
+    $("#curTemp").text(`Temp: ${curWeather.temp}F`);
+    $("#curWind").text(`Wind: ${curWeather.wind}mph`);
+    $("#curHumidity").text(`Humidity: ${curWeather.humid}%`);
     let uvClass = getUVClass(curWeather.uvi);
     $("#curUV").html(`UV Index: <span class="${uvClass}">${curWeather.uvi}</span>`);
 
@@ -110,7 +108,7 @@ function updateWeatherDisplay() {
 // API Requests
 
 function findCity(city) {
-    let url = findCityRequest + "?q=" + city + "&appid=" + key;
+    let url = `${findCityRequest}?q=${city}&appid=${totally_not_a_key}`;
     return fetch(url)
         .then(result => {
             return result.json();
@@ -132,7 +130,7 @@ function findCity(city) {
 }
 
 function getWeather() {
-    let url = getCityWeatherRequest + "?lat=" + cityDict[selectedCity].lat + "&lon=" + cityDict[selectedCity].lon + "&appid=" + key;
+    let url = `${getCityWeatherRequest}?lat=${cityDict[selectedCity].lat}&lon=${cityDict[selectedCity].lon}&appid=${totally_not_a_key}`;
     return fetch(url)
         .then(result => {
             return result.json();
